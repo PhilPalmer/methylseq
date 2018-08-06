@@ -15,6 +15,9 @@
 /*
  * SET UP CONFIGURATION VARIABLES
  */
+params.reads_folder = ""
+params.reads_extension="fastq"
+params.reads="${params.reads_folder}/*.${params.reads_extension}"
 params.name = false
 params.project = false
 params.clusterOptions = false
