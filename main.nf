@@ -17,7 +17,6 @@
  */
 params.reads_folder = ""
 params.reads_extension="fastq.gz"
-params.reads="${params.reads_folder}/*.${params.reads_extension}"
 params.name = false
 params.project = false
 params.clusterOptions = false
@@ -140,6 +139,7 @@ if(params.pbat){
 /*
  * Create a channel for input read files
  */
+$reads="${params.reads_folder}/*.${params.reads_extension}"
 Channel
     .fromFilePairs( params.reads, size: params.singleEnd ? 1 : 2 )
     .ifEmpty { exit 1, "Cannot find any reads matching: ${params.reads}\nNB: Path needs to be enclosed in quotes!\nIf this is single-end data, please specify --singleEnd on the command line." }
