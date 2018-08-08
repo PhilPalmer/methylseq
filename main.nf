@@ -141,8 +141,8 @@ if(params.pbat){
  */
 $reads="${params.reads_folder}/*.${params.reads_extension}"
 Channel
-    .fromFilePairs( params.reads, size: params.singleEnd ? 1 : 2 )
-    .ifEmpty { exit 1, "Cannot find any reads matching: ${params.reads}\nNB: Path needs to be enclosed in quotes!\nIf this is single-end data, please specify --singleEnd on the command line." }
+    .fromFilePairs( $reads, size: params.singleEnd ? 1 : 2 )
+    .ifEmpty { exit 1, "Cannot find any reads matching: ${reads}\nNB: Path needs to be enclosed in quotes!\nIf this is single-end data, please specify --singleEnd on the command line." }
     .into { read_files_fastqc; read_files_trimming }
 
 log.info "=================================================="
@@ -150,7 +150,7 @@ log.info " nf-core/methylseq : Bisulfite-Seq Best Practice v${params.version}"
 log.info "=================================================="
 def summary = [:]
 summary['Run Name']       = custom_runName ?: workflow.runName
-summary['Reads']          = params.reads
+summary['Reads']          = $reads
 summary['Aligner']        = params.aligner
 summary['Data Type']      = params.singleEnd ? 'Single-End' : 'Paired-End'
 summary['Genome']         = params.genome
