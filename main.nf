@@ -775,7 +775,6 @@ process multiqc {
     file ('picard/*') from picard_results.flatten().toList()
     file ('methyldackel/*') from methyldackel_results.flatten().toList()
     file ('qualimap/*') from qualimap_results.toList()
-    file ('software_versions/*') from software_versions_yaml.toList()
 
     output:
     file "*_report.html" into multiqc_report
