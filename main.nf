@@ -759,6 +759,7 @@ process get_software_versions {
  */
 process multiqc {
     publishDir "${params.outdir}/MultiQC", mode: 'copy'
+    echo true
 
     input:
     file multiqc_config
